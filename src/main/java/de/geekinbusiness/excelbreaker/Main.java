@@ -21,7 +21,7 @@ public class Main {
             BruteForce bruteForce = new BruteForce(eb);
             Integer maximumLenght = Integer.parseInt(args[1]);
             bruteForce.runUntilLenghtReached(maximumLenght);
-            System.out.println(bruteForce.matches);
+            System.out.println("Following matches were found: " + bruteForce.matches);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
