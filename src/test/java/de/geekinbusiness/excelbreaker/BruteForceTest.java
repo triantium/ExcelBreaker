@@ -24,7 +24,7 @@ public class BruteForceTest {
     public class testBooleanSup implements Function<String, Boolean> {
 
         String match = "#";
-        String match2 = "zhn8";
+        String match2 = "8e&";
 
         @Override
         public Boolean apply(String t) {
@@ -40,7 +40,7 @@ public class BruteForceTest {
         LocalDateTime start = LocalDateTime.now();
         System.out.println(start);
         BruteForce bf = new BruteForce(new testBooleanSup());
-        bf.runUntilLenghtReached(5);
+        bf.runUntilLenghtReached(3);
 
         LocalDateTime end = LocalDateTime.now();
         System.out.println(end);

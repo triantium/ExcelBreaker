@@ -20,12 +20,12 @@ public class MainTest {
     /**
      * Test of main method, of class Main.
      */
+    @Ignore
     @Test
     public void testMain() {
         Main.main(new String[]{"12.xlsx", "2"});
     }
 
-    @Ignore
     @Test
     public void testMainComplex() {
         Main.main(new String[]{"test.xlsx", "4"});
