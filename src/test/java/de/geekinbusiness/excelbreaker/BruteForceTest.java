@@ -28,10 +28,8 @@ public class BruteForceTest {
 
         @Override
         public Boolean apply(String t) {
-//            System.out.println("trying with " + t);
             return (t.equals(match) || t.equals(match2));
         }
-
     }
 
     /**
