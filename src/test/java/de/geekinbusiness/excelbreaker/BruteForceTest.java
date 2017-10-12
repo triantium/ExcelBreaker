@@ -1,7 +1,10 @@
 package de.geekinbusiness.excelbreaker;
 
-import static de.geekinbusiness.excelbreaker.BruteForce.fileNameTemplate;
-import java.io.File;
+import de.geekinbusiness.excelbreaker.BruteForceTest.testBooleanSup;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.function.Function;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,23 +21,35 @@ public class BruteForceTest {
     public void setUp() {
     }
 
+    public class testBooleanSup implements Function<String, Boolean> {
+
+        String match = "#";
+        String match2 = "zhn8";
+
+        @Override
+        public Boolean apply(String t) {
+//            System.out.println("trying with " + t);
+            return (t.equals(match) || t.equals(match2));
+        }
+
+    }
+
     /**
-     * Test of buildList method, of class BruteForce.
+     * Test of process method, of class BruteFor.
      */
     @Test
-    public void testBuildList() {
-        int i = 0;
-        File file = new File(String.format(fileNameTemplate, i));;
+    public void testProcess() {
+        LocalDateTime start = LocalDateTime.now();
+        System.out.println(start);
+        BruteForce bf = new BruteForce(new testBooleanSup());
+        bf.process(5);
 
-//        do {
-//            file.delete();
-//            i++;
-//            file = new File(String.format(fileNameTemplate, i));
-//        } while (file.canRead());
-        BruteForce bf = new BruteForce();
-
-        bf.buildFiles(4);
-        System.out.println(bf.computedFiles);
+        LocalDateTime end = LocalDateTime.now();
+        System.out.println(end);
+        long seconds = ChronoUnit.SECONDS.between(start, end);
+        System.out.println("Needed " + seconds + "s");
+        System.out.println("matches: " + bf.matches);
+        Assert.assertEquals(2, bf.matches.size());
     }
 
 }
