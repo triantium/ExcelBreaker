@@ -37,22 +37,21 @@ public class ExcelBreaker implements Function<String, Boolean> {
         return false;
     }
 
-    public void test(String pw) throws IOException {
-        NPOIFSFileSystem filesystem = new NPOIFSFileSystem(this.excelFile, true);
-        EncryptionInfo info = new EncryptionInfo(filesystem);
-        Decryptor d = Decryptor.getInstance(info);
-
-        try {
-            if (!d.verifyPassword(pw)) {
-                throw new RuntimeException("Unable to process: document is encrypted");
-            }
-
-//            InputStream dataStream = d.getDataStream(filesystem);
-//            dataStream.close();
-            // parse dataStream
-        } catch (GeneralSecurityException ex) {
-            throw new RuntimeException("Unable to process encrypted document", ex);
-        }
-    }
-
+//    public void test(String pw) throws IOException {
+//        NPOIFSFileSystem filesystem = new NPOIFSFileSystem(this.excelFile, true);
+//        EncryptionInfo info = new EncryptionInfo(filesystem);
+//        Decryptor d = Decryptor.getInstance(info);
+//
+//        try {
+//            if (!d.verifyPassword(pw)) {
+//                throw new RuntimeException("Unable to process: document is encrypted");
+//            }
+//
+////            InputStream dataStream = d.getDataStream(filesystem);
+////            dataStream.close();
+//            // parse dataStream
+//        } catch (GeneralSecurityException ex) {
+//            throw new RuntimeException("Unable to process encrypted document", ex);
+//        }
+//    }
 }

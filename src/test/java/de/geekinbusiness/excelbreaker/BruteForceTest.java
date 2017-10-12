@@ -40,7 +40,7 @@ public class BruteForceTest {
         LocalDateTime start = LocalDateTime.now();
         System.out.println(start);
         BruteForce bf = new BruteForce(new testBooleanSup());
-        bf.process(5);
+        bf.runUntilLenghtReached(5);
 
         LocalDateTime end = LocalDateTime.now();
         System.out.println(end);

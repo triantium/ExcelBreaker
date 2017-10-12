@@ -21,7 +21,7 @@ public class BruteForceJob implements Runnable {
 
     @Override
     public void run() {
-        bruteForce.runFor(n);
+        bruteForce.runForLenght(n);
         System.out.println("Matches found: " + bruteForce.matches);
     }
 

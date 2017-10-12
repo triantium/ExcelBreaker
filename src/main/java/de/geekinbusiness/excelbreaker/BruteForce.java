@@ -19,26 +19,27 @@ public class BruteForce {
         this.testClass = testClass;
     }
 
-    public void process(Integer n) {
-        for (int i = 1; i <= n; i++) {
-            runFor(i);
+    public void runUntilLenghtReached(Integer maximumLenght) {
+        for (int i = 1; i <= maximumLenght; i++) {
+            runForLenght(i);
         }
     }
 
-    public void runFor(Integer n) {
-        char[] charac = new char[n];
-        initCharacters(charac);
-        start(charac);
+    public void runForLenght(Integer n) {
+        char[] charac = initCharacters(n);
+        beginWithRecursion(charac);
         logger.info("Ended at " + String.copyValueOf(charac));
     }
 
-    private void initCharacters(char[] characters) {
-        for (int i = 0; i < characters.length; i++) {
-            characters[i] = lowerAsciBound;
+    private char[] initCharacters(int lenght) {
+        char[] charac = new char[lenght];
+        for (int i = 0; i < lenght; i++) {
+            charac[i] = lowerAsciBound;
         }
+        return charac;
     }
 
-    private void start(char[] charac) {
+    private void beginWithRecursion(char[] charac) {
         recurseAndTest(charac, charac.length - 1);
     }
 
