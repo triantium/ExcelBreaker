@@ -2,6 +2,7 @@ package de.geekinbusiness.excelbreaker;
 
 import java.util.function.Function;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -31,6 +32,7 @@ public class BruteForceJobTest {
     /**
      * Test of run method, of class BruteForceJob.
      */
+    @Ignore
     @Test
     public void testRun() {
         for (int i = 0; i < 8; i++) {
