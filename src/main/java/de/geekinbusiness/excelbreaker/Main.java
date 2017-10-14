@@ -16,11 +16,38 @@ public class Main {
      */
     public static void main(String[] args) {
         try {
-            //TODO check Arguments
-            ExcelBreaker eb = new ExcelBreaker(new File(args[0]));
-            BruteForce bruteForce = new BruteForce(eb);
+            if (args.length < 2) {
+                System.out.println(
+                        "Call me with java -jar ExcelBreaker.jar \"[/path/to/file.xlsx]\" \"[maximumCheck]\" <\"[true]\">");
+
+            }
+
+            String fileName = args[0];
+            File file = new File(fileName);
+            if (!file.canRead()) {
+                System.out.println("Cannot Read Path to File");
+            }
+            try {
+                Integer.parseInt(args[1]);
+            } catch (NumberFormatException ex) {
+                System.out.println("Can't parse second Argument to Integer");
+            }
+
+            boolean runInDepht;
+            if (args.length == 3) {
+                runInDepht = Boolean.parseBoolean(args[2]);
+            } else {
+                runInDepht = false;
+            }
+
+            ExcelTestFunction eb = new ExcelTestFunction(file);
             Integer maximumLenght = Integer.parseInt(args[1]);
-            bruteForce.runUntilLenghtReached(maximumLenght);
+            BruteForce bruteForce = new BruteForce(eb, file.toURI().toString());
+            if (runInDepht) {
+                bruteForce.runUntilLenghtReached(maximumLenght);
+            } else {
+                bruteForce.runForLenght(maximumLenght);
+            }
             System.out.println("Following matches were found: " + bruteForce.matches);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

@@ -2,7 +2,6 @@ package de.geekinbusiness.excelbreaker;
 
 import java.util.function.Function;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -32,14 +31,15 @@ public class BruteForceJobTest {
     /**
      * Test of run method, of class BruteForceJob.
      */
-    @Ignore
     @Test
     public void testRun() {
-        for (int i = 0; i < 8; i++) {
-
+        System.out.println("de.geekinbusiness.excelbreaker.BruteForceJobTest.testRun()");
+        for (int i = 0; i < 2; i++) {
+            System.out.println("Start Job " + i);
             BruteForceJob bruteForceJob = new BruteForceJob(i, new testBooleanSup());
             bruteForceJob.run();
         }
+        System.out.println("Started all Jobs");
     }
 
 }

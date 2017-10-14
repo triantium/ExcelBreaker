@@ -9,9 +9,9 @@ import org.apache.poi.poifs.crypt.Decryptor;
 import org.apache.poi.poifs.crypt.EncryptionInfo;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 
-public class ExcelBreaker implements Function<String, Boolean> {
+public class ExcelTestFunction implements Function<String, Boolean> {
 
-    Logger logger = Logger.getLogger(ExcelBreaker.class.getName());
+    Logger logger = Logger.getLogger(ExcelTestFunction.class.getName());
 
     File excelFile;
 
@@ -19,7 +19,7 @@ public class ExcelBreaker implements Function<String, Boolean> {
     EncryptionInfo info;
     Decryptor decryptor;
 
-    public ExcelBreaker(File excelFile) throws IOException {
+    public ExcelTestFunction(File excelFile) throws IOException {
         this.excelFile = excelFile;
         this.filesystem = new NPOIFSFileSystem(this.excelFile, true);
         this.info = new EncryptionInfo(this.filesystem);
@@ -28,7 +28,6 @@ public class ExcelBreaker implements Function<String, Boolean> {
 
     @Override
     public Boolean apply(String password) {
-
         try {
             return decryptor.verifyPassword(password);
         } catch (GeneralSecurityException ex) {
@@ -37,21 +36,4 @@ public class ExcelBreaker implements Function<String, Boolean> {
         return false;
     }
 
-//    public void test(String pw) throws IOException {
-//        NPOIFSFileSystem filesystem = new NPOIFSFileSystem(this.excelFile, true);
-//        EncryptionInfo info = new EncryptionInfo(filesystem);
-//        Decryptor d = Decryptor.getInstance(info);
-//
-//        try {
-//            if (!d.verifyPassword(pw)) {
-//                throw new RuntimeException("Unable to process: document is encrypted");
-//            }
-//
-////            InputStream dataStream = d.getDataStream(filesystem);
-////            dataStream.close();
-//            // parse dataStream
-//        } catch (GeneralSecurityException ex) {
-//            throw new RuntimeException("Unable to process encrypted document", ex);
-//        }
-//    }
 }

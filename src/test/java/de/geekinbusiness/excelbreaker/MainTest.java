@@ -8,6 +8,7 @@ import org.junit.Test;
  *
  * @author manuel müller <manuel.mueller@geekinbusiness.de>
  */
+@Ignore
 public class MainTest {
 
     public MainTest() {
@@ -17,18 +18,34 @@ public class MainTest {
     public void setUp() {
     }
 
+    @Ignore
+    @Test
+    public void testInvalidCall() {
+        System.out.println("de.geekinbusiness.excelbreaker.MainTest.testInvalidCall()");
+        Main.main(new String[]{""});
+    }
+
     /**
      * Test of main method, of class Main.
      */
-    @Ignore
     @Test
     public void testMain() {
-        Main.main(new String[]{"12.xlsx", "2"});
+        System.out.println("de.geekinbusiness.excelbreaker.MainTest.testMain()");
+        Main.main(new String[]{"12.xlsx", "2", "false"});
     }
 
+    @Ignore
+    @Test
+    public void testMissingFile() {
+        System.out.println("de.geekinbusiness.excelbreaker.MainTest.testMissingFile()");
+        Main.main(new String[]{"missing.xlsx", "2"});
+    }
+
+    @Ignore
     @Test
     public void testMainComplex() {
-        Main.main(new String[]{"test.xlsx", "4"});
+        System.out.println("de.geekinbusiness.excelbreaker.MainTest.testMainComplex()");
+        Main.main(new String[]{"test.xlsx", "4", "false"});
     }
 
 }

@@ -1,5 +1,12 @@
 package de.geekinbusiness.excelbreaker;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import static java.nio.file.StandardOpenOption.APPEND;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -12,6 +19,8 @@ public class BruteForce {
     final static char upperAsciBound = 126;
     final static char lowerAsciBound = 32;
 
+    private String testFileName = "FileNameNotSet";
+
     Function<String, Boolean> testClass;
     List<String> matches = new ArrayList();
 
@@ -19,8 +28,13 @@ public class BruteForce {
         this.testClass = testClass;
     }
 
+    public BruteForce(Function<String, Boolean> testClass, String fn) {
+        this.testClass = testClass;
+        this.testFileName = fn;
+    }
+
     public void runUntilLenghtReached(Integer maximumLenght) {
-        for (int i = 1; i <= maximumLenght; i++) {
+        for (int i = 1; i <= maximumLenght && matches.isEmpty(); i++) {
             runForLenght(i);
         }
     }
@@ -45,22 +59,51 @@ public class BruteForce {
 
     private void recurseAndTest(char[] charac, int modifyAt) {
         if (modifyAt >= 0) {
-            for (char j = lowerAsciBound; j < upperAsciBound; j++) {
+            for (char j = lowerAsciBound; (j < upperAsciBound && !test(charac)); j++) {
                 charac[modifyAt] = j;
-                test(charac);
+//                if (test(charac)) {
+//                    return;
+//                }
                 recurseAndTest(charac, modifyAt - 1);
             }
         }
     }
 
-    private void test(char[] characters) {
+    private boolean test(char[] characters) {
         String test = String.copyValueOf(characters);
         logger.finest("trying with " + test);
-
-        if (testClass.apply(test)) {
+        boolean result = testClass.apply(test);
+        if (result) {
             logger.info("match found for: " + test);
+            writeToPasswordFile(test);
+            logger.finest("File Written");
             matches.add(test);
             logger.finest(test + "|:|:|added to List");
+        }
+        return result;
+    }
+
+    private void writeToPasswordFile(String password) {
+
+        File writeFile = new File("passwords.txt");
+
+        String line = String.format("%s:\t%s\n", this.testFileName, password);
+        byte data[] = line.getBytes();
+        OutputStream out = null;
+        try {
+            out = new BufferedOutputStream(
+                    Files.newOutputStream(writeFile.toPath(), StandardOpenOption.CREATE, APPEND));
+
+            out.write(data, 0, data.length);
+            out.close();
+        } catch (IOException x) {
+            System.err.println(x);
+        } finally {
+            try {
+                out.close();
+
+            } catch (IOException ex) {
+            }
         }
     }
 
