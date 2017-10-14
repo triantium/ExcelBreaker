@@ -56,6 +56,12 @@ public class BruteForce {
 
     private void beginWithRecursion(char[] charac) {
         recurseAndTest(charac, charac.length - 1);
+        if (test(charac)) {
+            writeToPasswordFile(String.copyValueOf(charac));
+        } else {
+            writeToPasswordFile("No matches found for length: " + charac.length + ".");
+        }
+
     }
 
     private void recurseAndTest(char[] charac, int modifyAt) {
