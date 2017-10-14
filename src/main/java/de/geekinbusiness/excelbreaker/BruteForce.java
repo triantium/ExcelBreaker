@@ -40,6 +40,7 @@ public class BruteForce {
     }
 
     public void runForLenght(Integer n) {
+        logger.info("Starting for Lenght " + n);
         char[] charac = initCharacters(n);
         beginWithRecursion(charac);
         logger.info("Ended at " + String.copyValueOf(charac));
@@ -58,7 +59,9 @@ public class BruteForce {
     }
 
     private void recurseAndTest(char[] charac, int modifyAt) {
+
         if (modifyAt >= 0) {
+//            logger.info("Rekursiontiefe:\t" + modifyAt);
             for (char j = lowerAsciBound; (j < upperAsciBound && !test(charac)); j++) {
                 charac[modifyAt] = j;
 //                if (test(charac)) {
@@ -97,7 +100,7 @@ public class BruteForce {
             out.write(data, 0, data.length);
             out.close();
         } catch (IOException x) {
-            System.err.println(x);
+            logger.info(x.getMessage());
         } finally {
             try {
                 out.close();

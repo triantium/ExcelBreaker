@@ -11,11 +11,14 @@ import java.util.logging.Logger;
  */
 public class Main {
 
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try {
+            logger.info("Starting programm");
             if (args.length < 2) {
                 System.out.println(
                         "Call me with java -jar ExcelBreaker.jar \"[/path/to/file.xlsx]\" \"[maximumCheck]\" <\"[true]\">");
@@ -43,6 +46,7 @@ public class Main {
             ExcelTestFunction eb = new ExcelTestFunction(file);
             Integer maximumLenght = Integer.parseInt(args[1]);
             BruteForce bruteForce = new BruteForce(eb, file.toURI().toString());
+            logger.info("Initialization succesful");
             if (runInDepht) {
                 bruteForce.runUntilLenghtReached(maximumLenght);
             } else {
