@@ -7,7 +7,7 @@ import java.util.function.Function;
 import java.util.logging.Logger;
 import org.apache.poi.poifs.crypt.Decryptor;
 import org.apache.poi.poifs.crypt.EncryptionInfo;
-import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 public class ExcelTestFunction implements Function<String, Boolean> {
 
@@ -15,13 +15,13 @@ public class ExcelTestFunction implements Function<String, Boolean> {
 
     File excelFile;
 
-    NPOIFSFileSystem filesystem;
+    POIFSFileSystem filesystem;
     EncryptionInfo info;
     Decryptor decryptor;
 
     public ExcelTestFunction(File excelFile) throws IOException {
         this.excelFile = excelFile;
-        this.filesystem = new NPOIFSFileSystem(this.excelFile, true);
+        this.filesystem = new POIFSFileSystem(this.excelFile, true);
         this.info = new EncryptionInfo(this.filesystem);
         this.decryptor = Decryptor.getInstance(this.info);
     }
